@@ -9,104 +9,123 @@ int bush1 = 0, bush2 = 300, bush3 = 700;
 
 int stripe1 = 0, stripe2 = 500, stripe3 = 1000;
 
-int box1 = 1000, box2 = 1500;
+int bomb1 = round(random(800,1000)), bomb2 = round(random(1500,2000));
 
-PImage car, sun;
+int finish = 99999999;
+
+PImage car, sun, bomb;
+
+int x_car = 50, y_car= 400, distance1, distance2;
 
 // SETUP
 void setup(){
     size(800,600);
     car = loadImage("car.png");
     sun = loadImage("sun.png");
+    bomb = loadImage("bomb.png");
 
+    
     noStroke();
 }
 
 // DRAW
 void draw(){
-    background(blue); //my sky
+  
+    background(blue); //Sky
     
-    fill(white); //my cloud
+    image(sun, 700, -50, width/6, height/4); // placing the sun png
+    
+    fill(white); //Cloud1
     ellipse(cloud1, 150, 100, 100);
     ellipse(cloud1, 200, 100, 100);
     ellipse(cloud1-50, 200, 100, 100);
     ellipse(cloud1+50, 200, 100, 100);
   cloud1 -=1;
-  if(cloud1 <= -200){ // reset cloud1
+  if(cloud1 <= -200){ //Reset cloud1
   cloud1 = 1000;
   }
   
-  fill(white); //my cloud2
+  fill(white); //Cloud2
   ellipse(cloud2, 100, 100, 100);
   ellipse(cloud2, 150, 100, 100);
   ellipse(cloud2-50, 150, 100, 100);
   ellipse(cloud2+50, 150, 100, 100);
   cloud2 -=1;
-  if(cloud2 <= -200){ // reset cloud2
+  if(cloud2 <= -200){ // Reset cloud2
   cloud2 = 1000;
   }
   
-  fill(green); //bush
-  ellipse(bush1, 375, 40, 40);
-  ellipse(bush1, 400, 40, 40);
-  ellipse(bush1-25,400, 40, 40);
-  ellipse(bush1+25, 400, 40, 40);
+  fill(green); //Bush1
+  ellipse(bush1, 350, 40, 40);
+  ellipse(bush1, 370, 40, 40);
+  ellipse(bush1-25,370, 40, 40);
+  ellipse(bush1+25, 370, 40, 40);
   bush1 -=3;
-  if(bush1 <= -75){ // reset bush
+  if(bush1 <= -75){ //Reset bush
   bush1 = 1000;
   }
   
-  fill(green); //bush 2
-  ellipse(bush2, 375, 40, 40);
-  ellipse(bush2, 400, 40, 40);
-  ellipse(bush2-25,400, 40, 40);
-  ellipse(bush2+25, 400, 40, 40);
+  fill(green); //Bush 2
+  ellipse(bush2, 350, 40, 40);
+  ellipse(bush2, 370, 40, 40);
+  ellipse(bush2-25, 370, 40, 40);
+  ellipse(bush2+25, 370, 40, 40);
   bush2 -=3;
-  if(bush2 <= -75){ // reset bush
+  if(bush2 <= -75){ //Reset bush
   bush2 = 1000;
   }
   
-  fill(green); //bush 3
-  ellipse(bush3, 375, 40, 40);
-  ellipse(bush3, 400, 40, 40);
-  ellipse(bush3-25,400, 40, 40);
-  ellipse(bush3+25, 400, 40, 40);
+  fill(green); //Bush 3
+  ellipse(bush3, 350, 40, 40);
+  ellipse(bush3, 370, 40, 40);
+  ellipse(bush3-25,370, 40, 40);
+  ellipse(bush3+25, 370, 40, 40);
   bush3 -=3;
-  if(bush3 <= -75){ // reset bush
+  if(bush3 <= -75){ //Reset bush
   bush3 = 1000;
   }
   
   fill(grey);
-  rect(0,400,800,200); //my race ground
+  rect(0,375,800,225); //Race ground
   
-  fill(white); //my ground stripes
-  rect(stripe1, 500,250,25); 
-  rect(stripe2, 500,250,25);
-  rect(stripe3, 500,250,25);
+  fill(white); //Ground stripes
+  rect(stripe1, 475,250,25); 
+  rect(stripe2, 475,250,25);
+  rect(stripe3, 475,250,25);
   stripe1 -=2; stripe2 -=2; stripe3 -=2;
-  if(stripe1 <= -500){ //reset stripes
+  if(stripe1 <= -500){ //Reset stripe 1
   stripe1 = 1000;
   }
-  if(stripe2 <= -500){ //reset stripes
+  if(stripe2 <= -500){ //Reset stripe 2
   stripe2 = 1000;
   }
-  if(stripe3 <= -500){ //reset stripes
+  if(stripe3 <= -500){ //Reset stripe 3
   stripe3 = 1000;
   }
   
-  image(car, 50, 400, width/6, height/8);
-  image(sun, 750, -50, width/8, height/6);
+ 
+  image(car, x_car, y_car, width/8, height/10); // Placing the car png
   
-  fill(red); //danger box1
-  rect(box1, 400, 100, 100); 
-  if(box1 <= -500){ //reset box
-  box1 = 1000;
+  image(bomb, bomb1, 375, width/6, height/6); // Placing the car png
+  bomb1 -= 1;
+  if(bomb1 <= -1000){ //reset box
+  bomb1 = 1000;
   }
   
-  fill(red); //danger box2
-  rect(box2, 500, 100, 100); 
-  if(box2 <= -500){ //reset box
-  box2 = 400;
+  image(bomb, bomb2, 500, width/6, height/6); // Placing the car png
+  bomb2 -= 1;
+  if(bomb2 <= -1000){ //reset box
+  bomb2 = 2000;
   }
+  
+ distance1 = bomb1 - x_car;
+ if (distance1 <=100){
+ y_car = 525;}
+
+
+ distance2 = bomb2 - x_car;
+ if (distance2 <=100){
+ y_car = 400;}
+ 
   //saveFrame();
 }
